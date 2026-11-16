@@ -19,6 +19,23 @@
         {% endif %}
     </head>
     <body>
+        <header class="entete">
+        <div class="conteneur entete-contenu">
+            <a href="#" class="logo">Biblio<span>Tech</span></a>
+            <nav class="menu">
+                <a href="#" class="actif">Catalogue</a>
+                <a href="#">Les plus empruntés</a>
+            </nav>
+        </div>
+    </header>
         {% block body %}{% endblock %}
+    <footer class="pied">
+        <div class="conteneur pied-contenu">
+            <span>BiblioTech — médiathèque de quartier</span>
+            <span>Prêt de 3 semaines, renouvelable une fois</span>
+        </div>
+    </footer>
     </body>
+</html>
+
 </html>
