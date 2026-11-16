@@ -14,25 +14,16 @@
             <form method="get" class="filtres">
                 <select name="genre">
                     <option value="">Tous les genres</option>
-                    <option value="Aventure">Aventure</option>
-                    <option value="Policier">Policier</option>
-                    <option value="Roman">Roman</option>
-                    <option value="Science-fiction">Science-fiction</option>
+                    {% for genre in genres %}
+                    <option value="{{genre}}">{{genre}}</option>
+                    {% endfor %}
                 </select>
 
                 <select name="auteur">
                     <option value="">Tous les auteurs</option>
-                    <option value="Agatha Christie">Agatha Christie</option>
-                    <option value="Albert Camus">Albert Camus</option>
-                    <option value="Alexandre Dumas">Alexandre Dumas</option>
-                    <option value="Arthur Conan Doyle">Arthur Conan Doyle</option>
-                    <option value="Frank Herbert">Frank Herbert</option>
-                    <option value="George Orwell">George Orwell</option>
-                    <option value="Gustave Flaubert">Gustave Flaubert</option>
-                    <option value="Isaac Asimov">Isaac Asimov</option>
-                    <option value="Jules Verne">Jules Verne</option>
-                    <option value="Victor Hugo">Victor Hugo</option>
-                    <option value="Émile Zola">Émile Zola</option>
+                    {% for auteur in auteurs %}
+                    <option value="{{auteur}}">{{auteur}}</option>
+                    {% endfor %}
                 </select>
 
                 <select name="tri">
@@ -52,7 +43,11 @@
                 <article class="carte">
                     <a href="#" class="carte-couverture">
                         <img src="{{livre.image}}" alt="1984">
-                        <span class="badge badge-disponible">2 / 3 disponibles</span>
+                        {% if livre.estDisponible() %}
+                            <span class="badge badge-disponible">{{livre.getExemplairesDisponibles()}} / {{livre.exemplaires}} disponibles</span>
+                        {% else %}
+                            <span class="badge badge-indisponible">Indisponible</span>
+                        {% endif %}
                     </a>
                     <div class="carte-contenu">
                         <span class="genre">{{livre.genre}}</span>

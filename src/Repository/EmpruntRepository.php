@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Emprunt;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Livre;
 
 /**
  * @extends ServiceEntityRepository<Emprunt>
@@ -14,6 +15,18 @@ class EmpruntRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Emprunt::class);
+    }
+
+        /** Les derniers emprunts d'un livre, du plus récent au plus ancien */
+    public function findDerniersPourLivre(Livre $livre, int $nombre = 5): array
+    {
+        return $this->createQueryBuilder('e')
+            ->where('e.livre = :livre')
+            ->setParameter('livre', $livre)
+            ->orderBy('e.dateEmprunt', 'DESC')
+            ->setMaxResults($nombre)
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**

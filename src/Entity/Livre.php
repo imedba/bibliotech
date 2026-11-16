@@ -166,4 +166,35 @@ class Livre
 
         return $this;
     }
+
+        // Nombre total d'emprunts du livre
+    public function getNombreEmprunts(): int
+    {
+        return count($this->emprunts);
+    }
+
+    // Nombre d'emprunts dont le livre n'a pas encore été rendu
+    public function getEmpruntsEnCours(): int
+    {
+        $total = 0;
+        foreach ($this->emprunts as $emprunt) {
+            if ($emprunt->estEnCours()) {
+                $total = $total + 1;
+            }
+        }
+
+        return $total;
+    }
+
+    // Exemplaires possédés moins emprunts en cours, jamais négatif
+    public function getExemplairesDisponibles(): int
+    {
+        return max(0, $this->exemplaires - $this->getEmpruntsEnCours());
+    }
+
+    // Vrai s'il reste au moins un exemplaire disponible
+    public function estDisponible(): bool
+    {
+        return $this->getExemplairesDisponibles() > 0;
+    }
 }
