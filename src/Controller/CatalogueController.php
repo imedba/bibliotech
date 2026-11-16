@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Repository\LivreRepository;
+use App\Entity\Livre;
 
 final class CatalogueController extends AbstractController
 {
@@ -21,6 +22,14 @@ final class CatalogueController extends AbstractController
             'livres' => $livres,
             'genres' => $genres,
             'auteurs' => $auteurs
+        ]);
+    }
+
+    #[Route('/livre/{id}', name:'page_detail')]
+    public function pageDetail(Livre $livre): Response
+    {
+        return $this->render('catalogue/detail.html.twig', [
+            'livre' => $livre
         ]);
     }
 }
