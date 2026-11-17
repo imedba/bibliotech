@@ -87,55 +87,23 @@
             <h2 class="section-titre">Du même genre</h2>
 
             <div class="grille">
-
+                {% for memeGenre in memeGenres %}
                     <article class="carte">
                         <a href="#" class="carte-couverture">
                             <img src="https://placehold.co/400x600?text=L%27%C3%89tranger" alt="L'Étranger">
                             <span class="badge badge-indisponible">Indisponible</span>
                         </a>
                         <div class="carte-contenu">
-                            <span class="genre">Roman</span>
-                            <h2 class="carte-titre">L'Étranger</h2>
-                            <p class="carte-auteur">Albert Camus</p>
+                            <span class="genre">{{memeGenre.genre}}</span>
+                            <h2 class="carte-titre">{{ memeGenre.titre }}</h2>
+                            <p class="carte-auteur">{{ memeGenre.auteur }}</p>
                             <div class="carte-bas">
-                                <span class="carte-annee">1942</span>
+                                <span class="carte-annee">{{ memeGenre.annee }}</span>
                                 <a href="#" class="bouton bouton-petit">Voir</a>
                             </div>
                         </div>
                     </article>
-
-                    <article class="carte">
-                        <a href="#" class="carte-couverture">
-                            <img src="https://placehold.co/400x600?text=Les+Mis%C3%A9rables" alt="Les Misérables">
-                            <span class="badge badge-disponible">1 / 2 disponible</span>
-                        </a>
-                        <div class="carte-contenu">
-                            <span class="genre">Roman</span>
-                            <h2 class="carte-titre">Les Misérables</h2>
-                            <p class="carte-auteur">Victor Hugo</p>
-                            <div class="carte-bas">
-                                <span class="carte-annee">1862</span>
-                                <a href="#" class="bouton bouton-petit">Voir</a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="carte">
-                        <a href="#" class="carte-couverture">
-                            <img src="https://placehold.co/400x600?text=Madame+Bovary" alt="Madame Bovary">
-                            <span class="badge badge-disponible">1 / 1 disponible</span>
-                        </a>
-                        <div class="carte-contenu">
-                            <span class="genre">Roman</span>
-                            <h2 class="carte-titre">Madame Bovary</h2>
-                            <p class="carte-auteur">Gustave Flaubert</p>
-                            <div class="carte-bas">
-                                <span class="carte-annee">1857</span>
-                                <a href="#" class="bouton bouton-petit">Voir</a>
-                            </div>
-                        </div>
-                    </article>
-
+                {% endfor %}
             </div>
         </section>
 

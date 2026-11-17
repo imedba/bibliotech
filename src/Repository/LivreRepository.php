@@ -65,15 +65,15 @@ class LivreRepository extends ServiceEntityRepository
     /** Livres du même genre, sauf celui affiché */
     public function findMemeGenre(Livre $livre, int $nombre = 4): array
     {
-        return $this->createQueryBuilder('l')
-            ->where('l.genre = :genre')
-            ->andWhere('l.id != :id')
-            ->setParameter('genre', $livre->getGenre())
-            ->setParameter('id', $livre->getId())
+        return $this->createQueryBuilder('l') // Création d'un QueryBuilder pour l'entité Livre, avec l'alias 'l'
+            ->where('l.genre = :genre') // On filtre les livres par genre, en utilisant un paramètre nommé :genre
+            ->andWhere('l.id != :id') // On exclut le livre actuel de la liste, en filtrant par son ID
+            ->setParameter('genre', $livre->getGenre()) // On remplace le paramètre :genre par la valeur du genre du livre passé en argument
+            ->setParameter('id', $livre->getId()) // On remplace le paramètre :id par l'ID du livre passé en argument
             ->orderBy('l.titre')
-            ->setMaxResults($nombre)
-            ->getQuery()
-            ->getResult();
+            ->setMaxResults($nombre) // On determine le nombre maximum de résultats à retourner, par défaut 4
+            ->getQuery() // On récupère la requête construite par le QueryBuilder
+            ->getResult(); // On exécute la requête et on récupère les résultats sous forme de tableau d'objets Livre
     }
 
     /** Livres les plus empruntés */

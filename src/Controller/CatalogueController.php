@@ -27,13 +27,15 @@ final class CatalogueController extends AbstractController
     }
 
     #[Route('/livre/{id}', name:'page_detail')]
-    public function pageDetail(Livre $livre, EmpruntRepository $empruntRepository): Response
+    public function pageDetail(Livre $livre, EmpruntRepository $empruntRepository, LivreRepository $livreRepository): Response
     {
         // Ci dessous je récupere les derniers emprunts du livre passé en paramètre
         $derniersEmprunts = $empruntRepository->findDerniersPourLivre($livre);
+        $memeGenres = $livreRepository->findMemeGenre($livre, 5);
         return $this->render('catalogue/detail.html.twig', [
             'livre' => $livre,
-            'derniersEmprunts' => $derniersEmprunts
+            'derniersEmprunts' => $derniersEmprunts,
+            'memeGenres' => $memeGenres
         ]);
     }
 }
