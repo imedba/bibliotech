@@ -11,7 +11,7 @@
                 <p class="page-sous-titre">12 livres</p>
             </div>
 
-            <form method="get" class="filtres">
+            <form action="{{ path('app_catalogue') }}" method="get" class="filtres">
                 <select name="genre">
                     <option value="">Tous les genres</option>
                     {% for genre in genres %}

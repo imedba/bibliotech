@@ -45,19 +45,30 @@ class LivreRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('l');
 
+        // On rentre dans ce if si genre est défini
         if ($genre) {
             $qb->andWhere('l.genre = :genre')->setParameter('genre', $genre);
         }
 
+        // On rentre dans ce if si auteur est défini
         if ($auteur) {
             $qb->andWhere('l.auteur = :auteur')->setParameter('auteur', $auteur);
         }
 
-        match ($tri) {
-            'annee_desc' => $qb->orderBy('l.annee', 'DESC'),
-            'annee_asc'  => $qb->orderBy('l.annee', 'ASC'),
-            default      => $qb->orderBy('l.titre', 'ASC'),
-        };
+        if ($tri) {
+            if ($tri == "annee_desc")
+                $qb->orderBy('l.annee', 'DESC');
+            elseif ($tri == "annee_asc")
+                $qb->orderBy('l.annee', 'ASC');
+        } else {
+            $qb->orderBy('l.titre', 'ASC');
+        }
+        // On rentre dans ce if si tri est défini
+        // match ($tri) {
+        //     'annee_desc' => $qb->orderBy('l.annee', 'DESC'),
+        //     'annee_asc'  => $qb->orderBy('l.annee', 'ASC'),
+        //     default      => $qb->orderBy('l.titre', 'ASC'),
+        // };
 
         return $qb->getQuery()->getResult();
     }
