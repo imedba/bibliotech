@@ -20,13 +20,13 @@ class EmpruntRepository extends ServiceEntityRepository
         /** Les derniers emprunts d'un livre, du plus récent au plus ancien */
     public function findDerniersPourLivre(Livre $livre, int $nombre = 5): array
     {
-        return $this->createQueryBuilder('e')
-            ->where('e.livre = :livre')
-            ->setParameter('livre', $livre)
-            ->orderBy('e.dateEmprunt', 'DESC')
-            ->setMaxResults($nombre)
-            ->getQuery()
-            ->getResult();
+        return $this->createQueryBuilder('e') // ici e est un alias à emprunt
+            ->where('e.livre = :livre') // on filtre sur le livre
+            ->setParameter('livre', $livre) // on remplace le paramètre :livre par l'objet $livre passé en argument
+            ->orderBy('e.dateEmprunt', 'DESC') // on trie par date d'emprunt décroissante
+            ->setMaxResults($nombre) // on limite le nombre de résultats
+            ->getQuery() // on récupère la requête
+            ->getResult(); // on exécute la requête et on récupère les résultats
     }
 
 //    /**

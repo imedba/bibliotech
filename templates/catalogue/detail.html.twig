@@ -66,36 +66,19 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for emprunt in derniersEmprunts %}
                     <tr>
-                        <td>Camille Laurent</td>
-                        <td>02/11/2026</td>
-                        <td>Lyon</td>
-                        <td><span class="statut statut-en-cours">En cours</span></td>
+                        <td>{{emprunt.adherent.nom}}</td>
+                        <td>{{emprunt.dateEmprunt|date("d/m/Y")}}</td>
+                        <td>{{emprunt.adherent.ville}}</td>
+                        {% if emprunt.dateRetour == null %}
+                            <td><span class="statut statut-en-cours">En cours</span></td>
+                        {% else %}
+                            <td><span class="statut statut-rendu">Rendu</span></td>
+                        {% endif %}
+
                     </tr>
-                    <tr>
-                        <td>Hugo Martin</td>
-                        <td>14/10/2026</td>
-                        <td>Paris</td>
-                        <td><span class="statut statut-en-cours">En cours</span></td>
-                    </tr>
-                    <tr>
-                        <td>Inès Moreau</td>
-                        <td>21/09/2026</td>
-                        <td>Nantes</td>
-                        <td><span class="statut statut-rendu">Rendu le 08/10/2026</span></td>
-                    </tr>
-                    <tr>
-                        <td>Lucas Bernard</td>
-                        <td>03/09/2026</td>
-                        <td>Lille</td>
-                        <td><span class="statut statut-rendu">Rendu le 19/09/2026</span></td>
-                    </tr>
-                    <tr>
-                        <td>Sarah Lefèvre</td>
-                        <td>11/08/2026</td>
-                        <td>Bordeaux</td>
-                        <td><span class="statut statut-rendu">Rendu le 30/08/2026</span></td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </section>
